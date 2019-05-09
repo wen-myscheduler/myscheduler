@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "저장된 일정 확인"
+        android:id = "@+id/text1"
+        android:textSize="30sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="50dp"
+        android:textStyle = "bold"
+        />
+    <!--<EditText-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id = "@+id/ed_search"-->
+        <!--android:layout_alignParentTop = "true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:hint = "Search"/>-->
+
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text = "Search"-->
+        <!--android:id = "@+id/bt_search"-->
+        <!--android:layout_below = "@+id/ed_search"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--/>-->
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id = "@+id/listview1"
+        android:layout_below= "@+id/text1"
+        android:background="@android:color/holo_green_light"
+        android:layout_alignParentStart="true"
+        >
+
+    </ListView>
+
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text = "Add New Friends"-->
+        <!--android:id = "@+id/Bt_add_friend"-->
+        <!--android:layout_below = "@+id/ed_search"-->
+        <!--android:layout_toEndOf = "@+id/bt_search"-->
+        <!--/>-->
+
+</RelativeLayout>
