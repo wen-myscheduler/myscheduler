@@ -13,6 +13,7 @@ import com.kakao.auth.ISessionConfig;
 import com.kakao.auth.KakaoAdapter;
 import com.kakao.auth.KakaoSDK;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -29,6 +30,7 @@ public class App extends Application {
         /**
          * Session Config에 대해서는 default값들이 존재한다.
          * 필요한 상황에서만 override해서 사용하면 됨.
+         *
          * @return Session의 설정값.
          */
         // 카카오 로그인 세션을 불러올 때의 설정값을 설정하는 부분.
@@ -37,7 +39,7 @@ public class App extends Application {
             return new ISessionConfig() {
                 @Override
                 public AuthType[] getAuthTypes() {
-                    return new AuthType[] {AuthType.KAKAO_LOGIN_ALL};
+                    return new AuthType[]{AuthType.KAKAO_LOGIN_ALL};
                     /*로그인을 하는 방식을 지정하는 부분. AuthType로는 다음 네 가지 방식이 있다.
                     KAKAO_TALK: 카카오톡으로 로그인, KAKAO_STORY: 카카오스토리로 로그인, KAKAO_ACCOUNT: 웹뷰를 통한 로그인,
                     KAKAO_TALK_EXCLUDE_NATIVE_LOGIN: 카카오톡으로만 로그인+계정 없으면 계정생성 버튼 제공
@@ -87,7 +89,7 @@ public class App extends Application {
     }
 
     public static App getGlobalApplicationContext() {
-        if(instance == null) {
+        if (instance == null) {
             throw new IllegalStateException("this application does not inherit com.kakao.GlobalApplication");
         }
         return instance;
@@ -107,47 +109,51 @@ public class App extends Application {
         instance = null;
     }
 
-//------------------------------------db설정------------------------------------------------------------
-    public void dbConnFuc(){
+    //------------------------------------db설정------------------------------------------------------------
+    public void dbConnFuc() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         try {
             // db connection
             Class.forName("org.mariadb.jdbc.Driver");
-            Connection conn = DriverManager.getConnection( "jdbc:mariadb://myscheduler.cwkujazupkrx.ap-northeast-2.rds.amazonaws.com:3306/myscheduler","myscheduler", "myscheduler");
+            Connection conn = DriverManager.getConnection("jdbc:mariadb://myscheduler.cwkujazupkrx.ap-northeast-2.rds.amazonaws.com:3306/myscheduler", "myscheduler", "myscheduler");
             Statement stmt = conn.createStatement();
 
             // 너무 오래 DB를 loading하는 것 방지. (5초로 해놨음)
             stmt.setQueryTimeout(5);
             conn.close();
-        } catch (SQLException se) { Log.e("ERRO1", se.getMessage());
-        } catch (ClassNotFoundException e) { Log.e("ERRO2", e.getMessage());
-        } catch (Exception e) { Log.e("ERRO3", e.getMessage());
+        } catch (SQLException se) {
+            Log.e("ERRO1", se.getMessage());
+        } catch (ClassNotFoundException e) {
+            Log.e("ERRO2", e.getMessage());
+        } catch (Exception e) {
+            Log.e("ERRO3", e.getMessage());
         }
     }
 
     ArrayList<String> arr = new ArrayList<String>();
-    public void view_data(String sql){
+
+    public void view_data(String sql) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         Connection conn = null;
         PreparedStatement pstmt = null;
-        try{
+        try {
             Class.forName("org.mariadb.jdbc.Driver");
-            conn = DriverManager.getConnection( "jdbc:mariadb://myscheduler.cwkujazupkrx.ap-northeast-2.rds.amazonaws.com:3306/myscheduler","myscheduler","myscheduler");
+            conn = DriverManager.getConnection("jdbc:mariadb://myscheduler.cwkujazupkrx.ap-northeast-2.rds.amazonaws.com:3306/myscheduler", "myscheduler", "myscheduler");
             Statement st = conn.createStatement();
-            ResultSet rs= st.executeQuery(sql);
-            while(rs.next()){
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
                 arr.add(rs.getString("name"));
             }
-        }catch(Exception ex){
-            Toast.makeText(getApplicationContext(),ex.getMessage(),Toast.LENGTH_LONG).show();
-        }finally {
+        } catch (Exception ex) {
+            Toast.makeText(getApplicationContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
+        } finally {
             try {
-                if(pstmt != null) {
+                if (pstmt != null) {
                     pstmt.close(); // 선택사항이지만 호출 추천
                 }
-                if(conn != null) {
+                if (conn != null) {
                     conn.close(); // 필수 사항
                 }
             } catch (SQLException e) {
@@ -162,23 +168,20 @@ public class App extends Application {
         StrictMode.setThreadPolicy(policy);
         Connection conn = null;
         PreparedStatement tabled = null;
-//        PreparedStatement createIDtable = conn.prepareStatement("CREATE TABLE IF NOT EXISTS IDss(party VARCHAR(45), id VARCHAR(45), source INT);" );
-//        createIDtable.executeQuery();
-//        stmt.close();
         try {
             Class.forName("org.mariadb.jdbc.Driver");
-            conn = DriverManager.getConnection( "jdbc:mariadb://myscheduler.cwkujazupkrx.ap-northeast-2.rds.amazonaws.com:3306/myscheduler","myscheduler","myscheduler");
+            conn = DriverManager.getConnection("jdbc:mariadb://myscheduler.cwkujazupkrx.ap-northeast-2.rds.amazonaws.com:3306/myscheduler", "myscheduler", "myscheduler");
 
             tabled = conn.prepareStatement(sql);
             tabled.executeQuery();
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
-                if(tabled != null) {
+                if (tabled != null) {
                     tabled.close(); // 선택사항이지만 호출 추천
                 }
-                if(conn != null) {
+                if (conn != null) {
                     conn.close(); // 필수 사항
                 }
             } catch (SQLException e) {
@@ -186,4 +189,39 @@ public class App extends Application {
             }
         }
     }
+
+    public ArrayList<String> search(String data1, String tablename1, String condition) {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        Connection conn = null;
+        PreparedStatement tabled = null;
+        ArrayList<String> sa = new ArrayList<>();
+        try {
+            Class.forName("org.mariadb.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mariadb://myscheduler.cwkujazupkrx.ap-northeast-2.rds.amazonaws.com:3306/myscheduler", "myscheduler", "myscheduler");
+            tabled = conn.prepareStatement("SELECT " + data1 + " from "+ tablename1 + " where " + condition);
+            ResultSet rs = tabled.executeQuery();
+
+            while (rs.next()) {
+                sa.add(rs.getString("id"));
+            }
+
+            return sa;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (tabled != null) {
+                    tabled.close(); // 선택사항이지만 호출 추천
+                }
+                if (conn != null) {
+                    conn.close(); // 필수 사항
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return sa;
+    }
+
 }

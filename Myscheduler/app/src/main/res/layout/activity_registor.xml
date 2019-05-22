@@ -36,4 +36,12 @@
         android:text = "회원가입"
         android:id = "@+id/btn1"
         />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:text = "중복체크"
+        android:id = "@+id/re_check"
+        />
 </LinearLayout>
