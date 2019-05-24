@@ -51,13 +51,13 @@ public class registor extends AppCompatActivity {
                         startActivity(intent);
                     }
                     else{
-                        AlertDialog.Builder builder = new AlertDialog.Builder(registor.this);
-                        dialog = builder.setMessage("ID중복을 확인해주세요!")
-                                .setPositiveButton("확인",null)
-                                .create();
-                        dialog.show();
-                    }
+                    AlertDialog.Builder builder = new AlertDialog.Builder(registor.this);
+                    dialog = builder.setMessage("ID중복을 확인해주세요!")
+                            .setPositiveButton("확인",null)
+                            .create();
+                    dialog.show();
                 }
+            }
             }
         });
         btn2.setOnClickListener(new View.OnClickListener() {
