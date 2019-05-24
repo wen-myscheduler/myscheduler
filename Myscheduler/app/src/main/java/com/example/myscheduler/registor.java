@@ -44,7 +44,7 @@ public class registor extends AppCompatActivity {
                 else {
                     if(validate) {
                         a.InputSql("INSERT INTO User VALUES('" + id + "','" + pw + "', '" + nk + "')");
-
+                        a.InputSql("CREATE TABLE " +id+"friend (id varchar(15));");
                         Toast.makeText(getApplicationContext(), id + " 님 회원가입이 완료 되었습니다.", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(registor.this, LoginActivity.class);
 

@@ -3,6 +3,7 @@ package com.example.myscheduler;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,13 +16,15 @@ import com.bumptech.glide.Glide;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
-    String strNickname, strProfile;
-    Button btnLogout, btnAdd, btnView, btnSet;
-    App d ;
-    ListView list;
-    TextView tv,tv2;
+    private String strNickname, strProfile;
+    private Button btnLogout, btnAdd, btnView, btnSet;
+    private App d ;
+    private ListView list;
+    private TextView tv,tv2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,16 +40,24 @@ public class MainActivity extends AppCompatActivity {
         btnView = (Button)findViewById(R.id.btn_scheduleview);
         btnSet = (Button)findViewById(R.id.btn_setsched);
         d = (App)getApplication();
+
+
         Intent intent = getIntent();
-        strNickname = intent.getStringExtra("name");
-        strProfile = intent.getStringExtra("profile");
-        tvNickname.setText(strNickname);
-        Glide.with(this).load(strProfile).into(ivProfile);
+        String id = intent.getStringExtra("id");
+        Log.d("id",id);
+        ArrayList<String> as = d.search("name", "User", "id = \"" + id + "\"");
+        System.out.println("size : " + as.size());
+        for(String s : as) {
+            tvNickname.setText(s);
+        }
+//        strNickname = intent.getStringExtra("name");
+//        strProfile = intent.getStringExtra("profile");
+//        tvNickname.setText(strNickname);
+//        Glide.with(this).load(strProfile).into(ivProfile);
 
         d.dbConnFuc();
-        view_data();
-        tv2.setText(": 3명");
-        //d.InputSql("INSERT INTO User(name) VALUES("+ strNickname+")");
+        view_data(id);
+
 
         btnLogout.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -79,11 +90,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    void view_data(){
-        d.view_data("select * from jungfriend");
-        ArrayAdapter<String> rr;
-        rr = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,d.arr);
+    void view_data(String id){
+        d.view_data("select * from " + id +"friend");
+        ArrayAdapter<String> rr = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,d.arr);
         list.setAdapter(rr);
+        int k  = d.arr.size();
+        tv2.setText(" : "  +k+"명");
 
     }
 

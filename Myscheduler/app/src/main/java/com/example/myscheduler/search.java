@@ -11,11 +11,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class search extends AppCompatActivity {
-
-    //Button bt_add_new;
-    ListView list;
-    App d;
-    TextView tv;
+    private ListView list;
+    private App d;
+    private TextView tv;
 
 
     @Override
@@ -27,15 +25,8 @@ public class search extends AppCompatActivity {
         tv = (TextView)findViewById(R.id.text1);
         d = (App)getApplication();
         d.dbConnFuc();
-        d.InputSql("INSERT INTO IDss VALUES('A','B',124)");
-        d.InputSql("DELETE FROM IDss WHERE source=1");
         view_data();
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-            }
-        });
 //        bt_add_new.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -45,7 +36,7 @@ public class search extends AppCompatActivity {
     }
 
    void view_data(){
-        d.view_data("select * from time");
+        d.view_data("select * from User");
         ArrayAdapter<String> rr;
         rr = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,d.arr);
         list.setAdapter(rr);

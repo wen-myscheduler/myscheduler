@@ -64,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                 else {
                     if (validate) {
                         Intent regIntent = new Intent(getApplication(), MainActivity.class);
+                        regIntent.putExtra("id",input_userID);
                         startActivity(regIntent);
                     } else {
                         AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);

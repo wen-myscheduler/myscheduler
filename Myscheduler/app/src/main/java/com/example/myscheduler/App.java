@@ -144,7 +144,7 @@ public class App extends Application {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                arr.add(rs.getString("name"));
+                arr.add(rs.getString("id"));
             }
         } catch (Exception ex) {
             Toast.makeText(getApplicationContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
@@ -203,7 +203,7 @@ public class App extends Application {
             ResultSet rs = tabled.executeQuery();
 
             while (rs.next()) {
-                sa.add(rs.getString("id"));
+                sa.add(rs.getString(data1));
             }
 
             return sa;
