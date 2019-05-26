@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private String strNickname, strProfile;
-    private Button btnLogout, btnAdd, btnView, btnSet;
+    private Button btnLogout, btnAdd, btnView, btnSet,btnSche;
     private App d ;
     private ListView list;
     private TextView tv,tv2;
@@ -39,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
         btnAdd = (Button)findViewById(R.id.btn_adfriend);
         btnView = (Button)findViewById(R.id.btn_scheduleview);
         btnSet = (Button)findViewById(R.id.btn_setsched);
+
+
+        btnSche = (Button)findViewById(R.id.btn_team);
         d = (App)getApplication();
 
 
@@ -86,6 +89,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent setintent = new Intent(getApplicationContext(), CalanderView.class);
                 startActivity(setintent);
+            }
+        });
+        btnSche.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent scheintent = new Intent(getApplicationContext(),MakeTeam.class);
+                scheintent.putExtra("id",id);
+                startActivity(scheintent);
             }
         });
     }
