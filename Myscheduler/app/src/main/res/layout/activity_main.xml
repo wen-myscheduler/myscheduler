@@ -66,11 +66,12 @@
         app:layout_constraintRight_toRightOf="parent" />
 
     <ListView
-        android:id = "@+id/main_list"
+        android:id="@+id/main_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="360dp"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bt_friendlist"
-        />
+    />
 
     <Button
         android:id="@+id/btn_scheduleview"
@@ -98,6 +99,15 @@
         android:text="일정등록"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/btn_scheduleview" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id = "@+id/btn_team"
+        android:text = "팀만들기"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
 
 
 </android.support.constraint.ConstraintLayout>

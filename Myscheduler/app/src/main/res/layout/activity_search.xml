@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text = "친구목록"
+        android:text = "사용자 목록"
         android:id = "@+id/text1"
         android:textSize="30sp"
         android:layout_marginTop="5dp"
@@ -44,8 +44,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text = "Add New Friends"
-        android:id = "@+id/Bt_add_friend"
+        android:text = "전체 목록 보기"
+        android:id = "@+id/Bt_fulls"
         android:layout_below = "@+id/ed_search"
         android:layout_toEndOf = "@+id/bt_search"
         />

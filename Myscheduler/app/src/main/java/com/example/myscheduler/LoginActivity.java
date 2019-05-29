@@ -46,7 +46,13 @@ public class LoginActivity extends AppCompatActivity {
                 String input_password = edit2.getText().toString();
                 ArrayList<String> idcheck = new ArrayList<String>();
                 idcheck = db1.search("id", "User", "id = \"" + input_userID + "\"" + " and pw = \"" + input_password +"\"");
+                ArrayList<String> k = db1.view_data("select * from User");
+                System.out.println("size: " +idcheck.size());
+                System.out.println("size1 : " + k.size());
+                for(String t : k)
+                {
 
+                }
                 for(String s : idcheck)
                 {
                     if(s.compareTo(input_userID)==0)
