@@ -131,14 +131,13 @@ public class App extends Application {
         }
     }
 
+    ArrayList<String> arr = new ArrayList<String>();
 
-
-    public ArrayList<String> view_data(String sql) {
+    public void view_data(String sql) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         Connection conn = null;
         PreparedStatement pstmt = null;
-        ArrayList<String> arr = new ArrayList<String>();
         try {
             Class.forName("org.mariadb.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mariadb://myscheduler.cwkujazupkrx.ap-northeast-2.rds.amazonaws.com:3306/myscheduler", "myscheduler", "myscheduler");
@@ -147,7 +146,6 @@ public class App extends Application {
             while (rs.next()) {
                 arr.add(rs.getString("id"));
             }
-            return arr;
         } catch (Exception ex) {
             Toast.makeText(getApplicationContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
         } finally {
@@ -162,7 +160,6 @@ public class App extends Application {
                 e.printStackTrace();
             }
         }
-        return arr;
 
     }
 

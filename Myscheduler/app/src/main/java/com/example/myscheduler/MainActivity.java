@@ -44,7 +44,9 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
+        Log.d("id",id);
         ArrayList<String> as = d.search("name", "User", "id = \"" + id + "\"");
+        System.out.println("size : " + as.size());
         for(String s : as) {
             tvNickname.setText(s);
         }
@@ -77,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent addintent = new Intent(getApplicationContext(), search.class);
-                addintent.putExtra("id",id);
                 startActivity(addintent);
             }
         });
@@ -90,11 +91,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     void view_data(String id){
-        ArrayList<String> arr = new ArrayList<String>();
-        arr = d.view_data("select * from " + id +"friend");
-        ArrayAdapter<String> rr = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,arr);
+        d.view_data("select * from " + id +"friend");
+        ArrayAdapter<String> rr = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,d.arr);
         list.setAdapter(rr);
-        int k  = arr.size();
+        int k  = d.arr.size();
         tv2.setText(" : "  +k+"명");
 
     }
