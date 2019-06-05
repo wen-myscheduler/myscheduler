@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent setintent = new Intent(getApplicationContext(), CalanderView.class);
+                setintent.putExtra("id",id);
                 startActivity(setintent);
             }
         });
