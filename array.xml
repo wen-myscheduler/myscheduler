@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="btns">
+        <item >일정조회</item>
+        <item >친구추가</item>
+        <item >일정등록</item>
+        <item >팀만들기</item>
+    </string-array>
+</resources>
