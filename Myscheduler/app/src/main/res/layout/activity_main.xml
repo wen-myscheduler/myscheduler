@@ -66,25 +66,18 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:layout_marginTop="30dp">
-        <Button
-            android:id="@+id/btn_scheduleview"
-            android:layout_width="wrap_content"
+        <Spinner
+            android:id = "@+id/spinner1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="일정조회" />
+            android:layout_weight="2"
+            android:entries="@array/btns"
+            />
         <Button
-            android:id="@+id/btn_adfriend"
-            android:layout_width="wrap_content"
+            android:id = "@+id/btn_sel"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="친구추가" />
-        <Button
-            android:id="@+id/btn_setsched"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="일정등록" />
-        <Button
-            android:id = "@+id/btn_team"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text = "팀만들기" />
+            android:layout_weight="1"
+            android:text = "선택" />
     </LinearLayout>
 </LinearLayout>
