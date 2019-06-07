@@ -5,10 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,10 +23,12 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private String strNickname, strProfile;
-    private Button btnLogout, btnAdd, btnView, btnSet,btnSche;
+    private Button btnLogout, btnSel;
+    private Spinner spinner;
     private App d ;
     private ListView list;
     private TextView tv,tv2;
+    private int nextClass = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,14 +40,9 @@ public class MainActivity extends AppCompatActivity {
         tv = (TextView)findViewById(R.id.bt_friendlist);
         tv2 = (TextView)findViewById(R.id.textview6);
         btnLogout= findViewById(R.id.btnLogout);
-        btnAdd = (Button)findViewById(R.id.btn_adfriend);
-        btnView = (Button)findViewById(R.id.btn_scheduleview);
-        btnSet = (Button)findViewById(R.id.btn_setsched);
-
-
-        btnSche = (Button)findViewById(R.id.btn_team);
+        btnSel = (Button)findViewById(R.id.btn_sel);
+        spinner = (Spinner)findViewById(R.id.spinner1);
         d = (App)getApplication();
-
 
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
@@ -59,6 +58,15 @@ public class MainActivity extends AppCompatActivity {
         d.dbConnFuc();
         view_data(id);
 
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                nextClass = position;
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
 
         btnLogout.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -76,28 +84,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnAdd.setOnClickListener(new View.OnClickListener() {
+        btnSel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent addintent = new Intent(getApplicationContext(), search.class);
+                Intent addintent= null;
+                switch(nextClass) {
+                    case 0: // 일정조회
+                        //addintent = new Intent(getApplicationContext(), search.class);
+                        break;
+                    case 1: // 친구추가
+                        addintent = new Intent(getApplicationContext(), search.class);
+                        break;
+                    case 2: // 일정등록
+                        addintent = new Intent(getApplicationContext(), CalanderView.class);
+                        break;
+                    case 3: // 팀만들기
+                        addintent = new Intent(getApplicationContext(), MakeTeam.class);
+                }
                 addintent.putExtra("id",id);
                 startActivity(addintent);
-            }
-        });
-        btnSet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent setintent = new Intent(getApplicationContext(), CalanderView.class);
-                setintent.putExtra("id",id);
-                startActivity(setintent);
-            }
-        });
-        btnSche.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent scheintent = new Intent(getApplicationContext(),MakeTeam.class);
-                scheintent.putExtra("id",id);
-                startActivity(scheintent);
             }
         });
     }
