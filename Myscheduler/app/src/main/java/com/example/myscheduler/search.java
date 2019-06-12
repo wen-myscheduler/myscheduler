@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 
 public class search extends AppCompatActivity {
     private ListView list;
+    private ListViewAdapter2 adapter;
     private App d;
     private TextView tv;
     private Dialog dialog;
@@ -36,7 +38,7 @@ public class search extends AppCompatActivity {
         tv = (TextView)findViewById(R.id.text1);
         search = (EditText)findViewById(R.id.ed_search);
         fulls = (Button)findViewById(R.id.Bt_fulls);
-
+        adapter = new ListViewAdapter2();
         d = (App)getApplication();
         d.dbConnFuc();
 
@@ -88,6 +90,7 @@ public class search extends AppCompatActivity {
         ArrayAdapter<String> rr;
         rr = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,arr);
         list.setAdapter(rr);
+
     }
 
 

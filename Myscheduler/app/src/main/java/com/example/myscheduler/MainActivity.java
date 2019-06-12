@@ -3,6 +3,7 @@ package com.example.myscheduler;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnLogout, btnAdd, btnView, btnSet,btnSche;
     private App d ;
     private ListView list;
+    private ListViewAdapter2 adapter;
     private TextView tv,tv2;
     private String moim;
     @Override
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        adapter = new ListViewAdapter2();
         list = (ListView)findViewById(R.id.main_list);
         TextView tvNickname = findViewById(R.id.textNick2);
         ImageView ivProfile = findViewById(R.id.ivProfile);
@@ -105,8 +108,12 @@ public class MainActivity extends AppCompatActivity {
     void view_data(String id){
         ArrayList<String> arr = new ArrayList<String>();
         arr = d.view_data("select * from " + id +"friend");
-        ArrayAdapter<String> rr = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,arr);
-        list.setAdapter(rr);
+        //ArrayAdapter<String> rr = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,arr);
+        list.setAdapter(adapter);
+        for(String s : arr)
+        {
+            adapter.addItem(ContextCompat.getDrawable(this, R.drawable.default_image2), s);
+        }
         int k  = arr.size();
         tv2.setText(" : "  +k+"명");
 
