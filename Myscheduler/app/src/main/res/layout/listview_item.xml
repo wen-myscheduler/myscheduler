@@ -15,7 +15,6 @@
         android:layout_height="match_parent"
         android:text="TEXT"
         android:id="@+id/textView1"
-        android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:gravity="center"
         android:layout_weight="5" />

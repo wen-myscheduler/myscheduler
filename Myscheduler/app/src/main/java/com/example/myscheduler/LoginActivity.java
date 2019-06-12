@@ -55,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 for(String s : idcheck)
                 {
+
                     if(s.compareTo(input_userID)==0)
                     {
                         validate  = true;

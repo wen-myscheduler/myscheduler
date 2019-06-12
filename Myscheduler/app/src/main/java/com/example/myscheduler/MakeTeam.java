@@ -25,7 +25,6 @@ public class MakeTeam extends AppCompatActivity {
     private ListViewAdapter adapter;
     private EditText teamname;
     private Dialog dialog;
-    private boolean validate = true;
     private ArrayList<String> arr;
 
     @Override
@@ -41,7 +40,7 @@ public class MakeTeam extends AppCompatActivity {
         Intent intent = getIntent();
         String user_id = intent.getStringExtra("id");
         view_data(user_id);
-        String name =  teamname.getText().toString();
+
 
         //parent : ListView 자체에 대한 참조.
         //view : 클릭이 발생한 View에 대한 참조.
@@ -62,17 +61,51 @@ public class MakeTeam extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boolean success = true;
+                String naming =  teamname.getText().toString();
+                ArrayList<String> select = new ArrayList<String>();
+                SparseBooleanArray checkedItems = teamlist.getCheckedItemPositions();
+                int count = adapter.getCount() ;
 
-                if (name.equals("")) {
+                //System.out.println("개수 : " + count);
+                for (int i = count-1; i >= 0; i--) {
+                    if (checkedItems.get(i)) {
+                        //System.out.println("번호 : " + i);
+                        //System.out.println("CheckedItems" + checkedItems.toString());
+                        ListViewItem ad1;
+                        ad1 = (ListViewItem)adapter.getItem(i);
+                       // System.out.println("item 가져오기 " + ad1.getText());
+                        select.add(ad1.getText());
+                    }
+                }
+                // ------------------------------------------------------------------------------------------------------------
+                ArrayList<String> as1 = d.search("NAME", "TEAM", "NAME = \"" + naming + "\"");
+                for (String s : as1) {
+                        if (s.compareTo(naming) == 0) {
+                            success = false;
+                        }
+                }
+                if (naming.equals("")) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(MakeTeam.this);
                     dialog = builder.setMessage("모임이름을 입력해주세요!")
                             .setPositiveButton("확인", null)
                             .create();
                     dialog.show();
-                } else if (validate) {
-                    d.InputSql("CREATE TABLE IF NOT EXISTS " + name + "Team (id varchar(15), leader INT);");
-                    d.InputSql("INSERT INTO Team VALUES('" + name + "')");
-                    Toast.makeText(getApplicationContext(), name + " 팀을 만드셨습니다..", Toast.LENGTH_LONG).show();
+                } else if (success == true) {
+                    d.InputSql("CREATE TABLE IF NOT EXISTS " + naming + "Team (id varchar(15), leader INT);");
+                    d.InputSql("INSERT INTO TEAM VALUES('" + naming + "')");
+                    d.InputSql("INSERT INTO " + naming + "Team VALUES('"+ user_id+"', 1)");
+                    for(String s : select)
+                    {
+                        String ad = s;
+                        d.InputSql("INSERT INTO " + naming + "Team VALUES('"+ ad +"', 0)");
+                       // System.out.println("checked : " + s);
+                    }
+
+                    Toast.makeText(getApplicationContext(), naming + " 팀을 만드셨습니다..", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(MakeTeam.this, MainActivity.class);
+
+                    startActivity(intent);
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(MakeTeam.this);
                     dialog = builder.setMessage("이미 있는 모임입니다.")
@@ -84,38 +117,12 @@ public class MakeTeam extends AppCompatActivity {
         });
     }
 
-    void view_data(String id){
+    void view_data(String id) {
         ArrayList<String> arr = new ArrayList<String>();
-        ArrayList<String> select = new ArrayList<String>();
-        arr = d.view_data("select * from " + id +"friend");
-        for(String s : arr)
-        {
-            adapter.addItem(ContextCompat.getDrawable(this,R.drawable.default_image2),s);
+        arr = d.view_data("select * from " + id + "friend");
+        for (String s : arr) {
+            adapter.addItem(ContextCompat.getDrawable(this, R.drawable.default_image2), s);
         }
-        SparseBooleanArray checkedItems = teamlist.getCheckedItemPositions();
-        int count = adapter.getCount() ;
 
-        for (int i = count-1; i >= 0; i--) {
-            if (checkedItems.get(i)) {
-                select.get(i) ;
-            }
-        }
-        for(String s : select)
-        {
-            System.out.println("checked : " + s);
-        }
     }
-    void checked(String name)
-    {
-        validate = true;
-        ArrayList<String> as = d.search("name", "Team", "");
-        for (String s : as) {
-
-            if (s.compareTo(name) == 0) {
-                validate = false;
-            }
-            //System.out.println("id = " + s + ", " + success);
-        }
-    }
-
 }

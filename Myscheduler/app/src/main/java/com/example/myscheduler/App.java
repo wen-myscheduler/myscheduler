@@ -226,5 +226,38 @@ public class App extends Application {
         }
         return sa;
     }
+    public ArrayList<String> search(String data1, String tablename1) {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        Connection conn = null;
+        PreparedStatement tabled = null;
+        ArrayList<String> sa = new ArrayList<>();
+        try {
+            Class.forName("org.mariadb.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mariadb://myscheduler.cwkujazupkrx.ap-northeast-2.rds.amazonaws.com:3306/myscheduler", "myscheduler", "myscheduler");
+            tabled = conn.prepareStatement("SELECT " + data1 + " from "+ tablename1 );
+            ResultSet rs = tabled.executeQuery();
+
+            while (rs.next()) {
+                sa.add(rs.getString(data1));
+            }
+
+            return sa;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (tabled != null) {
+                    tabled.close(); // 선택사항이지만 호출 추천
+                }
+                if (conn != null) {
+                    conn.close(); // 필수 사항
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return sa;
+    }
 
 }

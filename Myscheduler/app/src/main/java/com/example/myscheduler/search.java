@@ -68,7 +68,7 @@ public class search extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String to_sc = search.getText().toString();
-                ArrayList<String> arr = d.view_data("select * from User where id LIKE \'%"+ to_sc + "%\' and id != \"" + user_id +"\"");
+                ArrayList<String> arr = d.view_data("select * from User where id LIKE \'%"+ to_sc + "%\' and id != \"" + user_id +"\" and id NOT IN (select id from "+ user_id+"friend)");
                 ArrayAdapter<String> rr;
                 rr = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,arr);
                 list.setAdapter(rr);
@@ -84,7 +84,7 @@ public class search extends AppCompatActivity {
 
    void view_data(String userid){
         ArrayList<String> arr = new ArrayList<String>();
-        arr = d.view_data("select * from User where id != \"" + userid+"\"");
+        arr = d.view_data("select * from User where id != \"" + userid+"\" and id NOT IN (select id from " + userid+"friend)" );
         ArrayAdapter<String> rr;
         rr = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,arr);
         list.setAdapter(rr);

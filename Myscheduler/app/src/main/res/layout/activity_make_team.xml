@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
     android:layout_height="match_parent">
 
     <TextView
@@ -12,29 +10,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30dp"
-        android:layout_gravity="left"
-        android:layout_marginLeft="30dp"
-        android:text="모임 이름 : " />
+        android:text="모임 이름 : "
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:id="@+id/teamnameinput"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:id = "@+id/teamnameinput" />
-
+        app:layout_constraintLeft_toRightOf="@+id/teamname"
+        app:layout_constraintTop_toTopOf="parent" />
     <Button
         android:id="@+id/log"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:text="모임만들기"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+         />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height= "450dp"
         android:id = "@+id/teamlist"
         android:fastScrollEnabled="true"
-        android:layout_marginTop="16dp"
         android:listSelector="@color/com_kakao_button_background_press"
-        android:choiceMode="multipleChoice" />
+        android:choiceMode="multipleChoice"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/teamnameinput"
 
-</LinearLayout>
+        />
+
+</android.support.constraint.ConstraintLayout>

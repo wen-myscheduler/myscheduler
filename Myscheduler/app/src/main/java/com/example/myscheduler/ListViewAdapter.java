@@ -64,6 +64,7 @@ public class ListViewAdapter extends BaseAdapter {
             return listViewItemList.get(position) ;
         }
 
+
         // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
         public void addItem(Drawable icon, String text) {
             ListViewItem item = new ListViewItem();

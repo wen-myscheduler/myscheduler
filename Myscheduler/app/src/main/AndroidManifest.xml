@@ -15,7 +15,9 @@
         <activity android:name=".MakeTeam"></activity>
         <activity android:name=".registor"></activity>
         <activity android:name=".search"></activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity">
+
+        </activity>
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
@@ -28,6 +30,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
 

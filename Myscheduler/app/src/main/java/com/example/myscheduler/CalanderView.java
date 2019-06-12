@@ -18,25 +18,26 @@ import java.util.Calendar;
 
 public class CalanderView extends AppCompatActivity {
 
-    CalendarView calanderView;
-    DateTime startDateTime;
-    DateTime endDateTime;
-    boolean isStart;
-    TextView date;
-    TextView date2;
-    TextView date3;
-    App db1;
-    Button btn2;
-    AlertDialog dialog;
-
+    private  CalendarView calanderView;
+    private DateTime startDateTime;
+    private DateTime endDateTime;
+    private boolean isStart;
+    private TextView date;
+    private TextView s_date;
+    private TextView e_date;
+    private App db1;
+    private Button btn2;
+    private AlertDialog dialog;
+    private int _hour, _minute;
+    private DateTime date_container;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calander_view);
         calanderView = (CalendarView) findViewById(R.id.calendarView);
-        date = (TextView) findViewById(R.id.textView3);
-        date2 = (TextView) findViewById(R.id.textView1);
-//        date3 = (TextView) findViewById(R.id.textView4);
+        date = (TextView) findViewById(R.id.cal_title);
+        s_date = (TextView)findViewById(R.id.cal_start);
+        e_date = (TextView)findViewById(R.id.cal_end);
         btn2 = (Button)findViewById(R.id.button2);
         db1 = (App)getApplication();
 
@@ -47,30 +48,30 @@ public class CalanderView extends AppCompatActivity {
         calanderView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                TimePickerDialog.OnTimeSetListener mTimeSetListener =
-                        new TimePickerDialog.OnTimeSetListener() {
-                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                                Toast.makeText(CalanderView.this, "hourOfDay : " + hourOfDay + " / minute : " + minute, Toast.LENGTH_SHORT).show();
-                            }
-                        };
                 Calendar _cal = Calendar.getInstance();
-                int _hour = _cal.get(Calendar.HOUR_OF_DAY);
-                int _minute = _cal.get(Calendar.MINUTE);
-                int _second = _cal.get(Calendar.SECOND);
-                TimePickerDialog _alert = new TimePickerDialog(CalanderView.this, mTimeSetListener, _hour, _minute, false);
+                TimePickerDialog _alert = new TimePickerDialog(CalanderView.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hour, int min) {
+                        String msg = String.format("%d 시 %d 분", hour, min);
+                        _hour = hour;
+                        _minute = min;
+                        Toast.makeText(CalanderView.this, msg, Toast.LENGTH_SHORT).show();
+                        date_container = new DateTime(year,month+1,dayOfMonth,_hour,_minute);
+                    }
+                }, _cal.get(Calendar.HOUR_OF_DAY), _cal.get(Calendar.MINUTE), false);
                 _alert.show();
 
                 if(isStart) {
-                    startDateTime = new DateTime(year, month+1, dayOfMonth, _hour, _minute, _second);
-                    String data = year + "년 " + (month+1) + "월 " + dayOfMonth + "일 " +_hour + "시 "+_minute+"분 "+_second+"초";
-                    date.setText("시작 시간 : "+ data);
-                    isStart = false;
-                } else {
-                    endDateTime = new DateTime(year, month+1, dayOfMonth, _hour, _minute, _second);
-                    String data = year + "년 " + (month+1) + "월 " + dayOfMonth + "일 " +_hour + "시 "+_minute+"분 "+_second+"초";
-                    date2.setText("종료 시간 : "+ data);
-                    isStart = true;
-                }
+                        startDateTime = date_container;
+                        String data = year + "년 " + (month+1) + "월 " + dayOfMonth + "일 " +_hour + "시 "+_minute+"분";
+                        s_date.setText("시작 시간 : "+ data);
+                        isStart = false;
+                    } else {
+                        endDateTime = date_container;
+                String data = year + "년 " + (month+1) + "월 " + dayOfMonth + "일 " +_hour + "시 "+_minute+"분";
+                e_date.setText("종료 시간 : "+ data);
+                isStart = true;
+            }
             }
         });
 

@@ -1,5 +1,7 @@
 package com.example.myscheduler;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private App d ;
     private ListView list;
     private TextView tv,tv2;
+    private String moim;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,9 +90,7 @@ public class MainActivity extends AppCompatActivity {
         btnSet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent setintent = new Intent(getApplicationContext(), CalanderView.class);
-                setintent.putExtra("id",id);
-                startActivity(setintent);
+                DialogSelectOption();
             }
         });
         btnSche.setOnClickListener(new View.OnClickListener() {
@@ -110,5 +111,44 @@ public class MainActivity extends AppCompatActivity {
         tv2.setText(" : "  +k+"명");
 
     }
+
+     void DialogSelectOption() {
+         ArrayList<String> items = d.search("NAME", "TEAM");
+         int d = items.size();
+         System.out.println(d);
+         String[] items1 = new String[d];
+         int i = 0;
+         for (String s : items) {
+             items1[i++] = s;
+         }
+         if (d == 0) {
+             Toast.makeText(getApplicationContext(), " 가입된 팀이 없습니다.", Toast.LENGTH_LONG).show();
+         } else {
+             AlertDialog.Builder ab = new AlertDialog.Builder(MainActivity.this);
+             ab.setTitle("모임 선택");
+             ab.setSingleChoiceItems(items1, 1,
+                     new DialogInterface.OnClickListener() {
+                         public void onClick(DialogInterface dialog, int whichButton) {
+                             // 각 리스트를 선택했을때
+                             moim = items1[whichButton];
+                             System.out.println("버튼 위치" + whichButton);
+                             System.out.println(items1[whichButton]);
+
+                         }
+                     }).setPositiveButton("선택",
+                     new DialogInterface.OnClickListener() {
+                         public void onClick(DialogInterface dialog, int whichButton) {
+                             // OK 버튼 클릭시 , 여기서 선택한 값을 메인 Activity 로 넘기면 된다.
+                            // System.out.println("moim값 :  " + moim);
+                             Intent setintent = new Intent(getApplicationContext(), CalanderView.class);
+                             setintent.putExtra("moim",moim);
+                             startActivity(setintent);
+                         }
+                     }).setNegativeButton("취소", null);
+             ab.show();
+        }
+     }
+
+
 
 }
