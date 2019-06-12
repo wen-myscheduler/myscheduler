@@ -23,7 +23,7 @@ public class MakeTeam extends AppCompatActivity {
     private ListView teamlist;
     private Button btn1;
     private ListViewAdapter adapter;
-    private EditText teamname;
+    private EditText teamname,object, start_day, end_day;
     private Dialog dialog;
     private ArrayList<String> arr;
 
@@ -37,6 +37,9 @@ public class MakeTeam extends AppCompatActivity {
         d = (App)getApplication();
         teamlist.setAdapter(adapter);
         teamname = (EditText)findViewById(R.id.teamnameinput);
+        object = (EditText)findViewById(R.id.objectinput);
+        start_day = (EditText)findViewById(R.id.start_day);
+        end_day = (EditText)findViewById(R.id.end_day);
         Intent intent = getIntent();
         String user_id = intent.getStringExtra("id");
         view_data(user_id);
@@ -63,6 +66,9 @@ public class MakeTeam extends AppCompatActivity {
             public void onClick(View v) {
                 boolean success = true;
                 String naming =  teamname.getText().toString();
+                String objecting = object.getText().toString();
+                String start = start_day.getText().toString();
+                String end = end_day.getText().toString();
                 ArrayList<String> select = new ArrayList<String>();
                 SparseBooleanArray checkedItems = teamlist.getCheckedItemPositions();
                 int count = adapter.getCount() ;
@@ -85,15 +91,17 @@ public class MakeTeam extends AppCompatActivity {
                             success = false;
                         }
                 }
-                if (naming.equals("")) {
+                if (naming.equals("") || objecting.equals("") || start.equals("")|| end.equals("")) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(MakeTeam.this);
-                    dialog = builder.setMessage("모임이름을 입력해주세요!")
+                    dialog = builder.setMessage("빈칸을 입력해주세요!")
                             .setPositiveButton("확인", null)
                             .create();
                     dialog.show();
                 } else if (success == true) {
                     d.InputSql("CREATE TABLE IF NOT EXISTS " + naming + "Team (id varchar(15), leader INT);");
-                    d.InputSql("INSERT INTO TEAM VALUES('" + naming + "')");
+                    d.InputSql("INSERT INTO TEAM VALUES('" + naming + "','"+ start+"','"+end+"','"+objecting+"')");
+//                    d.InputSql("INSERT INTO TEAM(object) VALUES('" + objecting + "')");
+//                    d.InputSql("INSERT INTO TEAM(start_time,end_time) VALUES('"+ start+"','"+end+"')");
                     d.InputSql("INSERT INTO " + naming + "Team VALUES('"+ user_id+"', 1)");
                     for(String s : select)
                     {
@@ -104,7 +112,7 @@ public class MakeTeam extends AppCompatActivity {
 
                     Toast.makeText(getApplicationContext(), naming + " 팀을 만드셨습니다..", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(MakeTeam.this, MainActivity.class);
-
+                    intent.putExtra("id",user_id);
                     startActivity(intent);
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(MakeTeam.this);

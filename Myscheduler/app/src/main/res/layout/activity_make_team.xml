@@ -14,12 +14,64 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/object"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="모임 목적 : "
+        android:textSize="30dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/teamname" />
     <EditText
         android:id="@+id/teamnameinput"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toRightOf="@+id/teamname"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/objectinput"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/object"
+        app:layout_constraintTop_toBottomOf="@+id/teamnameinput"
+         />
+    <EditText
+        android:id="@+id/start_day"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:hint = "2019-01-01"
+        app:layout_constraintLeft_toRightOf="@+id/through"
+        app:layout_constraintTop_toBottomOf="@+id/objectinput"
+        />
+    <TextView
+        android:id = "@+id/through"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="희망 기간 : "
+        android:textSize="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/objectinput"
+        />
+    <TextView
+        android:id = "@+id/buto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="~ "
+        android:textSize="30dp"
+        app:layout_constraintLeft_toRightOf="@+id/start_day"
+        app:layout_constraintTop_toBottomOf="@+id/objectinput"
+        />
+    <EditText
+        android:id="@+id/end_day"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:hint = "2019-12-31"
+        app:layout_constraintLeft_toRightOf="@+id/buto"
+        app:layout_constraintTop_toBottomOf="@+id/objectinput"
+        />
+
+
     <Button
         android:id="@+id/log"
         android:layout_width="wrap_content"
@@ -39,7 +91,7 @@
         android:listSelector="@color/com_kakao_button_background_press"
         android:choiceMode="multipleChoice"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/teamnameinput"
+        app:layout_constraintTop_toBottomOf="@+id/start_day"
 
         />
 
