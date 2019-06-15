@@ -1,122 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
     xmlns:tools="http://schemas.android.com/tools"
-
     android:layout_width="match_parent"
-
     android:layout_height="match_parent"
-
     android:orientation="vertical"
-
     android:gravity="center_horizontal"
-
     android:background="@color/colorPrimary"
-
     tools:context=".CalanderView">
 
 
 
     <TextView
-
         android:id="@+id/cal_title"
-
         android:layout_width="wrap_content"
-
         android:layout_height="wrap_content"
-
         android:layout_gravity="center_horizontal"
-
         android:layout_marginTop="10dp"
-
         android:text="Schedule등록"
-
         android:textAlignment="center"
-
         android:textSize = "20sp"
-
         android:textColor = "#fff"/>
     <TextView
-
         android:id="@+id/cal_start"
-
         android:layout_width="wrap_content"
-
         android:layout_height="wrap_content"
-
         android:layout_gravity="center_horizontal"
-
         android:layout_marginTop="10dp"
-
         android:textAlignment="center"
-
         android:textSize = "15sp"
-
         android:textColor = "#fff"/>
-
     <TextView
-
         android:id="@+id/cal_end"
-
         android:layout_width="wrap_content"
-
         android:layout_height="wrap_content"
-
         android:layout_gravity="center_horizontal"
-
         android:layout_marginTop="10dp"
-
         android:textAlignment="center"
-
         android:textColor="#fff"
-
         android:textSize="15sp" />
-
-
-
     <LinearLayout
-
         android:layout_width="300dp"
-
         android:layout_height="wrap_content"
-
         android:layout_gravity="center_horizontal"
-
-        android:layout_marginTop="48dp"
-
+        android:layout_marginTop="20dp"
         android:background="@drawable/bg_calander">
-
-
-
         <CalendarView
-
             android:id="@+id/calendarView"
-
             android:layout_width="wrap_content"
-
             android:layout_height="match_parent" />
-
-
-
     </LinearLayout>
 
-
     <Button
-
-        android:id="@+id/button2"
-
+        android:id="@+id/pick_bt"
         android:layout_width="wrap_content"
-
         android:layout_height="wrap_content"
-
         android:layout_gravity="center_horizontal"
-
-        android:layout_marginTop="30dp"
-
+        android:layout_marginTop="10dp"
+        android:text="일정 확정" />
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="0dp"
         android:text="일정 추가" />
-
 </LinearLayout>
 

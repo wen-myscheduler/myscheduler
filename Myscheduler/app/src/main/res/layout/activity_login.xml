@@ -49,6 +49,12 @@
     <com.kakao.usermgmt.LoginButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"></com.kakao.usermgmt.LoginButton>
+        android:layout_marginTop="110dp"></com.kakao.usermgmt.LoginButton>
 
+    <com.nhn.android.naverlogin.ui.view.OAuthLoginButton
+        android:id = "@+id/btOAuthLoginImg"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"></com.nhn.android.naverlogin.ui.view.OAuthLoginButton>
 </LinearLayout>
