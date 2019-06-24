@@ -8,15 +8,18 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:id="@+id/imageView1"
-        android:layout_weight="1" />
+        android:layout_weight="2" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:text="TEXT"
         android:id="@+id/textView1"
-        android:textSize="20sp"
-        android:gravity="center"
+        android:textSize="25dp"
+        android:textColor = "#633A00"
+        android:textStyle = "bold"
+        android:layout_marginLeft="70dp"
+        android:gravity="center_vertical"
         android:layout_weight="5" />
 
     <CheckBox

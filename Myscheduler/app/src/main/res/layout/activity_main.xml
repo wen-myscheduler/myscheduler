@@ -4,71 +4,80 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFE4"
     tools:context="com.example.myscheduler.MainActivity">
 
-    <ImageView
-        android:id="@+id/ivProfile"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:layout_constraintHorizontal_bias="0.0"
+    <LinearLayout
+        android:id="@+id/linear1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background = "#FAECC5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
-    <TextView
-        android:id="@+id/textNick"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="닉네임: "
-        android:textSize="20sp"
-        app:layout_constraintLeft_toRightOf="@+id/ivProfile"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/ivProfile"
+            android:layout_marginTop="5dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal|center" />
 
-    <TextView
-        android:id="@+id/textNick2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:textSize="20sp"
-        android:text="..."
-        app:layout_constraintStart_toEndOf="@+id/textNick"
-        app:layout_constraintTop_toTopOf="@+id/textNick" />
-
+        <TextView
+            android:id="@+id/textNick2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center"
+            android:text="..."
+            android:textStyle = "bold"
+            android:textColor = "#000"
+            android:textSize="20sp" />
+    </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id = "@+id/bt_friendlist"
         android:text = "친구목록"
+        android:textStyle="bold"
+        android:textColor = "#633A00"
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivProfile"
+        app:layout_constraintTop_toBottomOf="@+id/linear1"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id = "@+id/textview6"
         android:textSize="24sp"
+        android:textStyle = "bold"
+        android:textColor = "#633A00"
         app:layout_constraintLeft_toRightOf="@+id/bt_friendlist"
-        app:layout_constraintTop_toBottomOf="@+id/ivProfile"
+        app:layout_constraintTop_toBottomOf="@+id/linear1"
 
         />
     <Button
         android:id="@+id/btnLogout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:text="로그아웃"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight = "10dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        android:textColor="#633A00"
+        android:background="@drawable/btn_main"
+        app:layout_constraintTop_toBottomOf="@+id/linear1"
+        app:layout_constraintRight_toRightOf="parent"
+         />
 
     <ListView
         android:id="@+id/main_list"
         android:layout_width="match_parent"
         android:layout_height="360dp"
+        android:layout_marginTop="40dp"
+        android:dividerHeight="2dp"
+        android:divider = "#EAEAEA"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bt_friendlist"
     />
@@ -78,7 +87,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:layout_marginRight="5dp"
         android:text="일정조회"
+        android:textStyle= "bold"
+        android:textSize = "15dp"
+        android:textColor = "#633A00"
+        android:background="@drawable/btn_main"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/btn_adfriend" />
 
@@ -88,8 +102,13 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="친구추가"
+        android:textStyle= "bold"
+        android:layout_marginRight="5dp"
+        android:textSize = "15dp"
+        android:textColor = "#633A00"
+        android:background="@drawable/btn_main"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/btnLogout" />
+        app:layout_constraintLeft_toRightOf="@+id/btn_team" />
 
     <Button
         android:id="@+id/btn_setsched"
@@ -97,6 +116,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="일정등록"
+        android:layout_marginRight="5dp"
+        android:textStyle= "bold"
+        android:textSize = "15dp"
+        android:textColor = "#633A00"
+        android:background="@drawable/btn_main"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/btn_scheduleview" />
 
@@ -104,9 +128,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id = "@+id/btn_team"
+        android:background="@drawable/btn_main"
         android:text = "팀만들기"
-        app:layout_constraintBottom_toTopOf="@+id/btnLogout"
+        android:layout_marginRight="5dp"
+        android:textStyle= "bold"
+        android:textSize = "15dp"
+        android:textColor = "#633A00"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="16dp"
         />
 
 

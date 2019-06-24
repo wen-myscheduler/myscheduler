@@ -74,12 +74,12 @@ public class select {
                 if(add_day1 > sday)
                 {
                     if(add_day1 < eday) {//7-11/14~7-15/19
-                        for(int i=1; i<25;i++){
+                        for(int i=8; i<25;i++){
                             time[i] = 1; // 1이 가능한시간, 0은 못씀
                         }
                     }
                     else if (add_day1 == eday) { //7-11/14~7-12/19
-                        for(int i=1; i<Integer.parseInt(end_day.substring(11,13));i++){
+                        for(int i=8; i<Integer.parseInt(end_day.substring(11,13));i++){
                             time[i] = 1; // 1이 가능한시간, 0은 못씀
                         }
                     }
@@ -91,12 +91,12 @@ public class select {
                 }
             }
             else if(add_month >smonth && add_day1<eday){//8-1:7-25/14~8/2/19
-                for(int i=1; i<25;i++){
+                for(int i=8; i<25;i++){
                     time[i] = 1; // 1이 가능한시간, 0은 못씀
                 }
             }
             else if(add_month>smonth && add_day1==eday) {//8-1:7-25/14~8/1/19
-                for(int i=1; i<Integer.parseInt(end_day.substring(11,13));i++){
+                for(int i=8; i<Integer.parseInt(end_day.substring(11,13));i++){
                     time[i] = 1; // 1이 가능한시간, 0은 못씀
                 }
             }
@@ -126,7 +126,7 @@ public class select {
                 {
                     if(de_day==add_day1)
                     {
-                        for(int i=1; i<Integer.parseInt(day[j].substring(28,30));i++){
+                        for(int i=8; i<Integer.parseInt(day[j].substring(28,30));i++){
                             if(time[i]==0) {}
                             else time[i] +=1;
                         }

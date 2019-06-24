@@ -27,7 +27,9 @@ import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -138,8 +140,9 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View view){
             Intent intent = new Intent();
             intent.setType("image/*");
-            intent.setAction(Intent.ACTION_PICK);
-            startActivityForResult(Intent.createChooser(intent, "Get Album"), REQUEST_IMAGE_1);
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
+            startActivityForResult(intent, 1);
         }
         });
     }
@@ -265,11 +268,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
-
-
-
-
-
-
+    protected void onActivityResult(int requestCode, int resultCode, Intent va){
+        if(requestCode== 1){
+            if(resultCode == RESULT_OK){
+                try{
+                    InputStream in = getContentResolver().openInputStream(va.getData());
+                    Bitmap img = BitmapFactory.decodeStream(in);
+                    in.close();
+                    ivProfile.setImageBitmap(img);
+                }catch(FileNotFoundException e){
+                    e.printStackTrace();
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }

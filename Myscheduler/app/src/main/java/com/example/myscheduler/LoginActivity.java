@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.kakao.auth.AuthType;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.OAuthErrorCode;
 import com.kakao.auth.Session;
@@ -107,6 +108,15 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent regIntent =  new Intent(getApplication(), registor.class);
                 startActivity(regIntent);
+            }
+        });
+
+
+        Button btnLoginKakao = findViewById(R.id.kakaoLoginButton2);
+        btnLoginKakao.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Session.getCurrentSession().open(AuthType.KAKAO_LOGIN_ALL, LoginActivity.this);
             }
         });
 

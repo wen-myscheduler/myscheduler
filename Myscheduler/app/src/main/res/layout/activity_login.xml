@@ -3,58 +3,100 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:gravity="center|center_horizontal"
     android:orientation="vertical"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    android:background ="#FFFFE4"
+    >
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/sched"/>
 
     <TextView
         android:id="@+id/textNick"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="65dp"
-        android:layout_marginTop="48dp"
-        android:text="Myscheduler.ver1.0"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:text="Myscheduler"
         android:textColor="#112"
-
         android:textSize="23sp" />
 
     <EditText
         android:id="@+id/editText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:hint="ID"
-        android:inputType="text" />
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:hint="아이디"
+        android:inputType="text"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight = "32dp"
+        android:background = "@drawable/edittext_login"/>
 
     <EditText
         android:id="@+id/editText2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password"
-        android:inputType="textPassword" />
-
-    <Button
-        android:id="@+id/button"
+        android:layout_height="40dp"
+        android:hint="비밀번호"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight = "32dp"
+        android:layout_marginTop = "10dp"
+        android:layout_marginBottom="10dp"
+        android:inputType="textPassword"
+        android:background = "@drawable/edittext_login"/>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login" />
-    <Button
-        android:id="@+id/button2"
-        android:layout_marginTop="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="회원가입" />
+        android:gravity="center|center_horizontal"
+        android:orientation="horizontal">
 
-    <com.kakao.usermgmt.LoginButton
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/btnlogin"
+            android:textSize ="15dp"
+            android:textColor="#FFFFFF"
+            android:text="Login" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:text="회원가입"
+            android:textSize ="15dp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/btnlogin"/>
+    </LinearLayout>
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="110dp"></com.kakao.usermgmt.LoginButton>
+        android:textColor = "#000"
+        android:text = "또는"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"
+        android:textSize = "15dp"/>
 
+    <Button
+        android:id="@+id/kakaoLoginButton2"
+        android:layout_width="230dp"
+        android:layout_height="50dp"
+        android:background="@drawable/kakaologin"
+        ></Button>
     <com.nhn.android.naverlogin.ui.view.OAuthLoginButton
         android:id = "@+id/btOAuthLoginImg"
-        android:layout_width="wrap_content"
+        android:layout_width="270dp"
         android:layout_height="50dp"
         android:layout_centerInParent="true"
-        android:layout_marginTop="20dp"></com.nhn.android.naverlogin.ui.view.OAuthLoginButton>
+        android:layout_marginTop="5dp"></com.nhn.android.naverlogin.ui.view.OAuthLoginButton>
 </LinearLayout>

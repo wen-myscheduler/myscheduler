@@ -3,13 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FFFFE4">
 
     <TextView
         android:id="@+id/teamname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30dp"
+        android:textStyle = "bold"
         android:text="모임 이름 : "
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -19,19 +21,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="모임 목적 : "
+        android:textStyle = "bold"
         android:textSize="30dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/teamname" />
     <EditText
         android:id="@+id/teamnameinput"
-        android:layout_width="280dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toRightOf="@+id/teamname"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/objectinput"
-        android:layout_width="280dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toRightOf="@+id/object"
         app:layout_constraintTop_toBottomOf="@+id/teamnameinput"
@@ -50,6 +53,7 @@
         android:layout_height="wrap_content"
         android:text="희망 기간 : "
         android:textSize="20dp"
+        android:textStyle = "bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/objectinput"
         />
@@ -74,13 +78,15 @@
 
     <Button
         android:id="@+id/log"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="모임만들기"
+        android:textSize = "20dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:background="@drawable/btn_main2"
          />
 
     <ListView
@@ -90,6 +96,8 @@
         android:fastScrollEnabled="true"
         android:listSelector="@color/com_kakao_button_background_press"
         android:choiceMode="multipleChoice"
+        android:dividerHeight="2dp"
+        android:divider = "#EAEAEA"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/start_day"
 

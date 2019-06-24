@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background ="#FFFFE4"
     >
     <TextView
         android:layout_width="wrap_content"
@@ -11,31 +12,36 @@
         android:text = "사용자 목록"
         android:id = "@+id/text1"
         android:textSize="30sp"
+        android:textColor="#633A00"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="100dp"
         android:textStyle = "bold"
         />
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="32dp"
         android:id = "@+id/ed_search"
         android:layout_below = "@+id/text1"
+        android:background = "@drawable/edittext_login"
         android:hint = "Search"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text = "Search"
+        android:text = "사용자 검색"
         android:id = "@+id/bt_search"
         android:layout_below = "@+id/ed_search"
         android:layout_alignParentStart="true"
+        android:textColor = "#633A00"
+        android:background="@drawable/btn_main"
+        android:layout_marginRight="5dp"
         />
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id = "@+id/listview1"
         android:layout_below= "@+id/bt_search"
-        android:background="@android:color/holo_blue_light"
+        android:background="#FAF4C0"
         android:layout_alignParentStart="true"
         >
 
@@ -44,10 +50,12 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text = "전체 목록 보기"
+        android:text = "전체 유저 목록 보기"
         android:id = "@+id/Bt_fulls"
         android:layout_below = "@+id/ed_search"
         android:layout_toEndOf = "@+id/bt_search"
+        android:textColor = "#633A00"
+        android:background="@drawable/btn_main"
         />
 
 </RelativeLayout>
